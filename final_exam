@@ -26,14 +26,10 @@ my_strung = ""
 target = ""
 #각 매개변수의 초기값을 설정해 줘야 한다.(랜덤 문자열 더하기 위해)
 
-i = 0
-j = 0
-while(i < random.randint(1,100)):
-    my_strung += chr(random.randint(97,122))
-    i+=1
-while(j < random.randint(1,100)):
+for i in range(random.randint(1,100)): #1~100자 사이 랜덤한 알파벳
+    my_strung += chr(random.randint(97,122)) #a~z까지 랜덤으로 들어감
+for i in range(random.randint(1,100)):
     target += chr(random.randint(97,122))
-    j+=1
 #1~100자 사이 랜덤한 알파벳이 들어간 문자열을 만드는 target과 my_strung의 반복문이다.
 
 print(solution(my_strung, target))

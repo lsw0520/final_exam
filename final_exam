@@ -65,7 +65,8 @@ def solution(letter):
             answer += morse[word]
         else:
             answer += "?"
-        #만약 그 단어가 morse 딕셔너리 안에 있다면 그 모수부호에 해당하는 문자를 answer에 넣고 아니면 ?를 넣는다.
+        #만약 그 단어가 morse 딕셔너리 안에 있다면 
+        #그 모수부호에 해당하는 문자를 answer에 넣고 아니면 ?를 넣는다.
 
     return answer
 

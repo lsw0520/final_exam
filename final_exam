@@ -57,7 +57,7 @@ def solution(letter):
         '..-': 'u', '...-': 'v', '.--': 'w', '-..-': 'x', '-.--': 'y',
         '--..': 'z'
     }
-    words = letter.split(' ') #문자열을 나누어 분리된 문자열을 리스트로 반환한다.
+    words = letter.split() #문자열을 나누어 분리된 문자열을 리스트로 반환한다.
     answer = ''  #answer변수에 복호화된 모스부호를 넣어야하기 때문에 초기값을 설정해줘야 한다.
 
     for word in words: #리스트 안에있는 각 문자를 순서대로 word에 대입해준다.

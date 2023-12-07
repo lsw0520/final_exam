@@ -1,0 +1,166 @@
+#<오픈소스프로그래밍 기말 프로젝트>
+#
+# ● 아래의 코드를 수정 혹은 프로그래밍하여 문제를 해결하시오.
+# ● 문제의 점수는 각각 표시되며, 부분점수가 존재합니다.
+#
+# 학번 : 20201877 이름 : 이승원
+
+# Q.1 10점
+#
+# 문자열 my_string과 target이 매개변수로 주어질 때,
+# target이 문자열 my_string의 부분 문자열이라면 1을,
+# 아니라면 0을 return 하는 solution 함수를 작성하시오.
+#
+# 제한사항
+# 1 ≤ my_string 의 길이 ≤ 100
+# my_string 은 영소문자로만 이루어져 있습니다.
+# 1 ≤ target 의 길이 ≤ 100
+# target 은 영소문자로만 이루어져 있습니다.
+
+import random #난수를 만들기 위해 표준 라이브러리를 추가한다.(1~100자 이내 문자열을 만들기 위한 난수)
+def solution(my_strung, target):
+    answer = 1 if target in my_strung else 0  #파이썬의 조건부 표현식을 사용해 조건문을 만든다.
+    return answer
+    
+my_strung = "" 
+target = ""
+#각 매개변수의 초기값을 설정해 줘야 한다.(랜덤 문자열 더하기 위해)
+
+for i in range(random.randint(1,101)): #1~100자 사이 랜덤한 알파벳
+    my_strung += chr(random.randint(97,122)) #a~z까지 랜덤으로 들어감
+for i in range(random.randint(1,101)):
+    target += chr(random.randint(97,122))
+#1~100자 사이 랜덤한 알파벳이 들어간 문자열을 만드는 target과 my_strung의 반복문이다.
+
+print(solution(my_strung, target))
+
+# Q.2 10점
+#
+# 모스부호 해독 프로그램 만들기
+# 문자열 letter 가 매개변수로 주어질 때,
+# letter 영어 소문자로 바꾼 문자열을 return 하는
+# solution 함수를 완성하시오.
+#
+# 제한사항
+# 1 ≤ letter 의 길이 ≤ 1,000
+# letter 의 모스부호는 공백으로 나누어져 있습니다.
+# letter 에 공백은 연속으로 두 개 이상 존재하지 않습니다.
+#
+# letter = 여러분의 좌우명 또는 인상 깊었던 말을 쓰시오.
+
+def solution(letter):
+    morse = { 
+        '.-': 'a', '-...': 'b', '-.-.': 'c', '-..': 'd', '.': 'e',
+        '..-.': 'f', '--.': 'g', '....': 'h', '..': 'i', '.---': 'j',
+        '-.-': 'k', '.-..': 'l', '--': 'm', '-.': 'n', '---': 'o',
+        '.--.': 'p', '--.-': 'q', '.-.': 'r', '...': 's', '-': 't',
+        '..-': 'u', '...-': 'v', '.--': 'w', '-..-': 'x', '-.--': 'y',
+        '--..': 'z'
+    }
+    words = letter.split() #문자열을 나누어 분리된 문자열을 리스트로 반환한다.
+    answer = ''  #answer변수에 복호화된 모스부호를 넣어야하기 때문에 초기값을 설정해줘야 한다.
+
+    for word in words: #리스트 안에있는 각 문자를 순서대로 word에 대입해준다.
+        if word in morse: 
+            answer += morse[word]
+        else:
+            answer += "?"
+        #만약 그 단어가 morse 딕셔너리 안에 있다면 
+        #그 모수부호에 해당하는 문자를 answer에 넣고 아니면 ?를 넣는다.
+
+    return answer
+
+letter = ".-.. .. ..-. . .. ... ... .... --- .-. - -.-- --- ..- -. . . -.. .--. -.-- - .... --- -." #life is short you need python 모스부호 암호화
+print(solution(letter))
+
+# Q.3 10점
+#
+# 행성의 나이를 알파벳으로 표현할 때,
+# a는 0, b는 1, ..., j는 9
+# 예를 들어 cd는 23살, fb는 51살입니다.
+# age가 매개변수로 주어질 때
+# PROGEAMMER-857식 나이를 return 하도록
+# solution 함수를 완성하시오.
+#
+# 제한사항
+# age는 자연수입니다.
+# age ≤ 1,000
+# PROGRAMMERS-857 행성은 알파벳 소문자만 사용합니다.
+
+def solution(age):
+    answer = "" #구한 나이를 집어넣기 위해 초기값을 설정한다.
+    while(age>0):
+        num = age % 10 #나머지를 구하는 연산자를 통해 나머지를 구한다.
+        answer = chr(97 + num) + answer 
+        #아스키 코드 a의 정수형은 97이기 때문에 97에 age에 나머지인 0을 더해서 문자열로 바꾸고 answer에 더한다.
+        age //= 10 #나머지의 문자열을 더한 다음에 나머지 부분을 없애기 위해 //해주어 몫을 구한다.
+
+    return answer
+
+age=23
+print(solution(age))
+
+# Q.4 10점
+#
+# x축과 y축으로 이루어진 2차원 직교 좌표계에 중심이 원점인
+# 서로 다른 크기의 원이 두 개 주어집니다.
+# 반지름을 나타내는 두 정수 r1, r2가 매개변수로 주어질 때,
+# 두 원 사이의 공간에 x좌표와 y좌표가 모두 정수인 점의 개수를
+# return하도록 solution 함수를 완성해주세요.
+# ※ 각 원 위의 점도 포함하여 셉니다.
+#
+# 제한사항
+# 1 ≤ r1 < r2 ≤ 1,000,000
+
+def solution(r1, r2):
+    answer = 0
+    if(r2>r1):
+        for i in range(-r2-1, r2+1): 
+            for j in range (-r2-1, r2+1):
+                if(r1**2 <= i**2 + j**2 <= r2**2):
+                    answer += 1
+    #각 i와 j가 좌표의 경우의 수 역할을 한다. 
+    #경우의 수로 나온 모든 좌표중에 원점에서 좌표까지의
+    #거리가 r1보다 길고 r2보다 짧은 좌표가 있다면 
+    #answer에 +1을 해주어 개수를 추가 해 준다.
+    else:
+        for i in range(-r1-1, r1+1): 
+            for j in range (-r1-1, r1+1):
+                if(r2**2 <= i**2 + j**2 <= r1**2):
+                    answer += 1
+    #만약 r2가 r1보다 작을 수 있으니 else로 반대버전을 넣어 준다.
+
+    return answer
+
+print(solution(2, 1))
+
+# Q.5 10점
+#
+# 0 또는 양의 정수가 주어졌을 때,
+# 정수를 이어 붙여 만들 수 있는 가장 큰 수를 알아내 주세요.
+#
+# 예를 들어, 주어진 정수가 [6, 10, 2]라면
+# [6102, 6210, 1062, 1026, 2610, 2106]를 만들 수 있고,
+# 이중 가장 큰 수는 6210입니다.
+#
+# 0 또는 양의 정수가 담긴 배열 numbers가 매개변수로 주어질 때,
+# 순서를 재배치하여 만들 수 있는 가장 큰 수를 문자열로 바꾸어
+# return 하도록 solution 함수를 작성해주세요.
+#
+# 제한사항
+# numbers의 길이는 1 이상 100,000 이하입니다.
+# numbers의 원소는 0 이상 1,000 이하입니다.
+# 정답이 너무 클 수 있으니 문자열로 바꾸어 return 합니다.
+#
+# numbers = [8, 30, 17, 2, 23]
+
+def solution(numbers):
+    numbers = sorted(map(str, numbers), key=lambda a: (a*4)[:4])
+    #넘버즈 리스트의 요소를 문자열로 바꾼 후 key매개변수를 이용해 각 원소를 4배해서 만든 4자리수를 비교해 순서대로 정렬한다.
+    numbers.reverse()
+    #넘버즈 요소가 순서대로 작은 수 부터 정렬되어있기 때문에 reverse해서 큰 원소가 맨 앞으로 오도록 한다.
+    return "".join(numbers)
+    #join으로 리스트의 원소들을 공백없이 연결해준다.
+
+numbers = [8, 30, 17, 3, 23]
+print(solution(numbers))
